@@ -4,19 +4,15 @@ from discord.ext import commands
 import aiohttp
 import json
 import os
-from dotenv import load_dotenv # Import baru
+from dotenv import load_dotenv
 
-# Load file .env
 load_dotenv()
 
-# Ambil token dari file .env (LEBIH AMAN)
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
-# Variabel Global
 ACTIVE_MODEL = None 
 
-# Setup Bot (Perhatikan bedanya di sini)
 class BotClient(commands.Bot):
     def __init__(self):
         intents = discord.Intents.default()
@@ -24,14 +20,12 @@ class BotClient(commands.Bot):
         super().__init__(command_prefix="!", intents=intents)
 
     async def setup_hook(self):
-        # Ini langkah penting buat Slash Command (Sync ke server)
         print("🔄 Sinkronisasi Slash Commands...")
         await self.tree.sync()
         print("✅ Slash Commands Siap!")
 
 bot = BotClient()
 
-# --- FUNGSI CARI MODEL (Sama kayak kemarin) ---
 async def cari_model_otomatis():
     global ACTIVE_MODEL
     url = f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}"
@@ -68,14 +62,12 @@ async def help(interaction: discord.Interaction):
         color=0x3498db
     )
 
-    # Field 1: Syntax Command (To the point)
     embed.add_field(
         name="🚀 Cara Penggunaan",
         value="Gunakan perintah slash berikut:\n```/parafrase [gaya] [teks]```",
         inline=False
     )
 
-    # Field 2: Penjelasan Gaya Bahasa (Lebih formal)
     embed.add_field(
         name="🎨 Opsi Gaya Bahasa",
         value=(
@@ -88,14 +80,11 @@ async def help(interaction: discord.Interaction):
         inline=False
     )
 
-    # Footer: Credit Developer (Ini yang kamu minta)
-    # Icon URL bisa dihapus kalau tidak mau pakai foto profilmu di bawah
     embed.set_footer(
         text="Developed with ☕ by Aldi | Powered by Gemini AI",
         icon_url=interaction.user.display_avatar.url
     )
     
-    # Menampilkan pesan (ephemeral=True biar cuma kamu yang lihat, False biar semua orang lihat)
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
 @bot.tree.command(name="parafrase", description="Ubah kalimat jadi lebih manusiawi")
@@ -137,19 +126,27 @@ async def parafrase_slash(interaction: discord.Interaction, gaya: app_commands.C
         label = "Netral"
 
     prompt = (
-        f"Bertindaklah sebagai penulis manusia profesional. Tugasmu adalah memparafrase teks berikut.\n"
+        f"Bertindaklah sebagai Ghostwriter profesional manusia (bukan AI). Tugasmu adalah menulis ulang teks akademik berikut agar lolos deteksi AI (ZeroGPT) sepenuhnya.\n"
         f"Target Gaya: {instr}.\n\n"
-        f"PENTING:\n"
-        f"1. Variasikan panjang kalimat.\n"
-        f"2. Hindari kata-kata sambung klise AI.\n"
-        f"3. Masukkan sedikit emosi/opini jika relevan.\n"
-        f"4. Ubah struktur paragraf agar tidak monoton.\n"
-        f"5. Tujuan: Lolos deteksi AI.\n\n"
-        f"Teks asli: {teks}"
+        f"INSTRUKSI KHUSUS (WAJIB DIPATUHI):\n"
+        f"1. HANCURKAN POLA ROBOT: AI suka kalimat 'Subjek-Predikat-Objek' yang rapi. Jangan pakai itu terus. Gunakan kalimat pasif, inversi, atau mulai kalimat dengan kata kerja/keterangan.\n"
+        f"2. BURSTINESS (Ledakan Variasi): Campur kalimat yang sangat panjang dan kompleks dengan kalimat super pendek (3-5 kata) untuk memberikan efek hentakan. Contoh: 'Itu fakta. Bukan opini.'\n"
+        f"3. HINDARI KATA 'AI BANGET': Jangan gunakan kata klise seperti: 'signifikan', 'komprehensif', 'dapat disimpulkan', 'selain itu', 'pada dasarnya', 'dalam konteks ini'. Ganti dengan kosa kata yang lebih membumi/spesifik.\n"
+        f"4. SUNTIKAN HUMANIS: Gunakan analogi, metafora, atau pertanyaan retoris untuk membuat teks terasa hidup dan punya emosi.\n"
+        f"5. RESTRUKTURISASI TOTAL: Jangan hanya ganti sinonim baris per baris. Ubah urutan penyampaian ide jika perlu, asalkan intinya tetap sama.\n\n"
+        f"Teks asli yang harus dirombak total: {teks}"
     )
 
     url = f"https://generativelanguage.googleapis.com/v1beta/{ACTIVE_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    payload = {"contents": [{"parts": [{"text": prompt}]}]}
+    
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 1.2,
+            "topP": 0.95,
+            "topK": 40
+        }
+    }
 
     try:
         async with aiohttp.ClientSession() as session:
