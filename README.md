@@ -69,6 +69,7 @@ python bot_final.py
 Slash Commands
 Type / in any channel where the bot is invited to see the menu.
 | Command | Description |
+| :--- | ---: |
 | /parafrase | Opens the menu to select style and input text. |
 | /help | Shows the help menu and documentation. |
 
