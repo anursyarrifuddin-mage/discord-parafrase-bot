@@ -126,24 +126,24 @@ async def parafrase_slash(interaction: discord.Interaction, gaya: app_commands.C
         label = "Netral"
 
     prompt = (
-        f"Bertindaklah sebagai Ghostwriter profesional manusia (bukan AI). Tugasmu adalah menulis ulang teks akademik berikut agar lolos deteksi AI (ZeroGPT) sepenuhnya.\n"
+        f"Bertindaklah sebagai Dosen Pembimbing atau Editor Jurnal Akademik profesional. "
+        f"Tugasmu adalah menulis ulang (rephrase) teks berikut agar cocok untuk Skripsi/Makalah Ilmiah.\n"
         f"Target Gaya: {instr}.\n\n"
-        f"INSTRUKSI KHUSUS (WAJIB DIPATUHI):\n"
-        f"1. HANCURKAN POLA ROBOT: AI suka kalimat 'Subjek-Predikat-Objek' yang rapi. Jangan pakai itu terus. Gunakan kalimat pasif, inversi, atau mulai kalimat dengan kata kerja/keterangan.\n"
-        f"2. BURSTINESS (Ledakan Variasi): Campur kalimat yang sangat panjang dan kompleks dengan kalimat super pendek (3-5 kata) untuk memberikan efek hentakan. Contoh: 'Itu fakta. Bukan opini.'\n"
-        f"3. HINDARI KATA 'AI BANGET': Jangan gunakan kata klise seperti: 'signifikan', 'komprehensif', 'dapat disimpulkan', 'selain itu', 'pada dasarnya', 'dalam konteks ini'. Ganti dengan kosa kata yang lebih membumi/spesifik.\n"
-        f"4. SUNTIKAN HUMANIS: Gunakan analogi, metafora, atau pertanyaan retoris untuk membuat teks terasa hidup dan punya emosi.\n"
-        f"5. RESTRUKTURISASI TOTAL: Jangan hanya ganti sinonim baris per baris. Ubah urutan penyampaian ide jika perlu, asalkan intinya tetap sama.\n\n"
-        f"Teks asli yang harus dirombak total: {teks}"
+        f"INSTRUKSI PENULISAN (WAJIB):\n"
+        f"1. STRUKTUR KALIMAT MAJEMUK: Hindari kalimat yang terlalu pendek atau terpotong-potong. Gunakan kalimat majemuk bertingkat yang mengalir (flow) dengan kata penghubung yang tepat (koherensi).\n"
+        f"2. KOSAKATA AKADEMIS VARIATIF: Jangan gunakan kata 'standar' AI berulang-ulang. Gunakan sinonim akademis yang lebih luwes. (Contoh: alih-alih 'hal ini menunjukkan', gunakan 'fenomena ini mengindikasikan').\n"
+        f"3. HINDARI POLA ROBOT: Jangan selalu memulai kalimat dengan Subjek. Sesekali awali dengan Keterangan Waktu, Anak Kalimat, atau Frasa Preposisi untuk memecah pola monoton.\n"
+        f"4. PERTAHANKAN MAKNA ILMIAH: Jangan ubah istilah teknis penting, tapi ubah cara penjelasannya agar terdengar seperti analisis mendalam manusia, bukan ringkasan mesin.\n"
+        f"5. TUJUAN: Hasilkan teks yang 100% formal, baku (PUEBI), namun memiliki 'ritme' penulisan manusia yang natural.\n\n"
+        f"Teks asli: {teks}"
     )
 
     url = f"https://generativelanguage.googleapis.com/v1beta/{ACTIVE_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 1.2,
-            "topP": 0.95,
+            "temperature": 0.85,     # Turunkan dikit biar gak ngelantur kayak puisi
+            "topP": 0.95,            # Tetap tinggi biar kosakata luas
             "topK": 40
         }
     }
