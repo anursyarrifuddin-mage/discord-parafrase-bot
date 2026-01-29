@@ -6,8 +6,6 @@
 
 A smart Discord bot designed to **paraphrase and humanize text** using Google's advanced Generative AI (Gemini). This bot is optimized to rewrite text in various styles while aiming to bypass AI detection systems (Humanizer).
 
-Developed by **[Aldi Nur Syarrifuddin]**.
-
 ---
 
 ## ✨ Key Features
