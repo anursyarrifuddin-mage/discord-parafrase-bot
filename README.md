@@ -56,8 +56,8 @@ DISCORD_TOKEN=your_discord_bot_token_here
 GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
     Note:
-    - Get Discord Token from [Discord Developer Portal](https://discord.com/developers/applications).
-    - Get Gemini API Key from [Google AI Studio](https://aistudio.google.com/api-keys).
+    - Get Discord Token from [Discord Developer Portal](https://discord.com/developers/applications)
+    - Get Gemini API Key from [Google AI Studio](https://aistudio.google.com/api-keys)
 
 ### 4. Run the bot
 ```bash
@@ -74,8 +74,8 @@ Type / in any channel where the bot is invited to see the menu.
 | /help | Shows the help menu and documentation. |
 
 ## Styles Explained
-Formal: Best for assignments, thesis (Skripsi), or formal reports.
-Santai: Best for chatting with friends.
-Jaksel: "Which is literally" style.
-Lucu: Adds jokes and humor to the text.
-Inggris: Paraphrases or translates text into natural English.
+- Formal: Best for assignments, thesis (Skripsi), or formal reports.
+- Santai: Best for chatting with friends.
+- Jaksel: "Which is literally" style.
+- Lucu: Adds jokes and humor to the text.
+- Inggris: Paraphrases or translates text into natural English.
