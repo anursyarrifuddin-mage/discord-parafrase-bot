@@ -126,15 +126,16 @@ async def parafrase_slash(interaction: discord.Interaction, gaya: app_commands.C
         label = "Netral"
 
     prompt = (
-        f"Bertindaklah sebagai Dosen Pembimbing atau Editor Jurnal Akademik profesional. "
-        f"Tugasmu adalah menulis ulang (rephrase) teks berikut agar cocok untuk Skripsi/Makalah Ilmiah.\n"
+        f"Bertindaklah sebagai Akademisi Senior. Tugasmu adalah memparafrase teks berikut untuk Skripsi/Jurnal agar lolos deteksi AI, namun TETAP FORMAL dan BAKU.\n"
         f"Target Gaya: {instr}.\n\n"
-        f"INSTRUKSI PENULISAN (WAJIB):\n"
-        f"1. STRUKTUR KALIMAT MAJEMUK: Hindari kalimat yang terlalu pendek atau terpotong-potong. Gunakan kalimat majemuk bertingkat yang mengalir (flow) dengan kata penghubung yang tepat (koherensi).\n"
-        f"2. KOSAKATA AKADEMIS VARIATIF: Jangan gunakan kata 'standar' AI berulang-ulang. Gunakan sinonim akademis yang lebih luwes. (Contoh: alih-alih 'hal ini menunjukkan', gunakan 'fenomena ini mengindikasikan').\n"
-        f"3. HINDARI POLA ROBOT: Jangan selalu memulai kalimat dengan Subjek. Sesekali awali dengan Keterangan Waktu, Anak Kalimat, atau Frasa Preposisi untuk memecah pola monoton.\n"
-        f"4. PERTAHANKAN MAKNA ILMIAH: Jangan ubah istilah teknis penting, tapi ubah cara penjelasannya agar terdengar seperti analisis mendalam manusia, bukan ringkasan mesin.\n"
-        f"5. TUJUAN: Hasilkan teks yang 100% formal, baku (PUEBI), namun memiliki 'ritme' penulisan manusia yang natural.\n\n"
+        f"TEKNIK PENULISAN (WAJIB DITERAPKAN):\n"
+        f"1. HINDARI POLA 'SUBJEK-PREDIKAT' YANG MONOTON: Jangan selalu mengawali kalimat dengan Subjek (misal: 'Penelitian ini menunjukkan...'). \n"
+        f"   -> Ganti dengan: Awali kalimat menggunakan Keterangan, Frasa Preposisi, atau Anak Kalimat. (Contoh: 'Dalam kerangka analisis ini, ditemukan bahwa...' atau 'Berangkat dari premis tersebut, penelitian menyoroti...').\n"
+        f"2. GANTI KATA SAMBUNG KLISE: Haramkan kata sambung AI sejuta umat seperti: 'selain itu', 'oleh karena itu', 'dapat disimpulkan', 'di sisi lain'. \n"
+        f"   -> Ganti dengan: 'terlepas dari hal tersebut', 'konsekuensinya', 'secara fundamental', 'sejalan dengan argumen di atas'.\n"
+        f"3. KEPADATAN INFORMASI: Gabungkan dua kalimat pendek menjadi satu kalimat majemuk yang kompleks namun padu (kohesif). Hindari kalimat yang terlalu pendek-pendek (choppy).\n"
+        f"4. SUNTIKAN NUANSA: Gunakan kata kerja yang lebih spesifik dan bertenaga (misal: ganti 'membuat' dengan 'mengkonstruksi', ganti 'menjelaskan' dengan 'mengelaborasi').\n"
+        f"5. FINAL CHECK: Pastikan bahasa tetap PUEBI/Baku, tidak puitis, tidak berlebihan, tapi strukturnya tidak tertebak oleh mesin.\n\n"
         f"Teks asli: {teks}"
     )
 
@@ -142,8 +143,8 @@ async def parafrase_slash(interaction: discord.Interaction, gaya: app_commands.C
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 0.85,     # Turunkan dikit biar gak ngelantur kayak puisi
-            "topP": 0.95,            # Tetap tinggi biar kosakata luas
+            "temperature": 0.95,
+            "topP": 0.95,
             "topK": 40
         }
     }
