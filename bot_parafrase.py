@@ -21,19 +21,6 @@ class BotClient(commands.Bot):
         super().__init__(command_prefix="!", intents=intents)
 
     async def setup_hook(self):
-        # --- SERVER PALSU PORT 8000 (AGAR SEHAT DI KOYEB) ---
-        async def handle_ping(request):
-            return web.Response(text="Bot Aman Bos!")
-
-        app = web.Application()
-        app.add_routes([web.get('/', handle_ping)])
-        runner = web.AppRunner(app)
-        await runner.setup()
-        site = web.TCPSite(runner, '0.0.0.0', 8000)
-        await site.start()
-        print("🌍 Server palsu Port 8000 aktif!")
-        # ----------------------------------------------------
-
         print("🔄 Sinkronisasi Slash Commands...")
         await self.tree.sync()
         print("✅ Slash Commands Siap!")
