@@ -55,9 +55,10 @@ Create a new file named .env in the root directory. Add your credentials (do not
 DISCORD_TOKEN=your_discord_bot_token_here
 GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
-    Note:
-    - Get Discord Token from [Discord Developer Portal](https://discord.com/developers/applications)
-    - Get Gemini API Key from [Google AI Studio](https://aistudio.google.com/api-keys)
+
+Note:
+- Get Discord Token from [Discord Developer Portal](https://discord.com/developers/applications).
+- Get Gemini API Key from [Google AI Studio](https://aistudio.google.com/api-keys).
 
 ### 4. Run the bot
 ```bash
