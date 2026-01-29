@@ -44,12 +44,12 @@ Follow these steps to run the bot on your local machine.
 git clone [https://github.com/anursyarrifuddin-mage/discord-parafrase-bot.git](https://github.com/anursyarrifuddin-mage/discord-parafrase-bot.git)
 cd discord-parafrase-bot
 ```
-# 2. Install Depedencies
+### 2. Install Depedencies
 Make sure you have Python installed. Then run:
 ```bash
 pip install -r requirements.txt
 ```
-# 3. Configure Environment Variables
+### 3. Configure Environment Variables
 Create a new file named .env in the root directory. Add your credentials (do not share this file):
 ```env
 DISCORD_TOKEN=your_discord_bot_token_here
@@ -59,7 +59,7 @@ GEMINI_API_KEY=your_google_gemini_api_key_here
     - Get Discord Token from [Discord Developer Portal](https://discord.com/developers/applications).
     - Get Gemini API Key from [Google AI Studio](https://aistudio.google.com/api-keys).
 
-# 4. Run the bot
+### 4. Run the bot
 ```bash
 python bot_final.py
 ```
