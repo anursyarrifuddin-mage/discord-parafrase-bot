@@ -62,7 +62,7 @@ Note:
 
 ### 4. Run the bot
 ```bash
-python bot_final.py
+python bot_parafrase.py
 ```
 (Note: If you renamed the main file, use that filename instead).
 
